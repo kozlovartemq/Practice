@@ -1,5 +1,5 @@
 SELECT Company.Company_code, company.founder, 
-COUNT(distinct LEAD_MANAGER.LEAD_MANAGER_code), /* distinct - взаимодействие только с неповторяющимися данными */
+COUNT(distinct LEAD_MANAGER.LEAD_MANAGER_code), /* distinct - interact only with non-duplicate data */
 COUNT(distinct Senior_Manager.Senior_Manager_code),
 COUNT(distinct Manager.Manager_code),
 COUNT(distinct Employee.Employee_code)
