@@ -15,10 +15,10 @@ FROM (select ROW_NUMBER() OVER (PARTITION BY Occupation order by NAME) AS ROW_, 
 FROM OCCUPATIONS) AS NewTable 
 group by ROW_
     /*  
-    min/max для агрегирования данных(чтобы использовать group by)
-    min() для строковых данных покажет строку, которая начинается с буквы, которая находится как можно раньше в алфавите, max() - противоположно
-    ROW_NUMBER() OVER(...) - используется для пронумеровки строк
-    PARTITION BY - используется для разделения данных на несколько подразделов
-    order by - настроить, в каком порядке будут располагаться строки для последующей нумеровки
-    group by - обрабатывает вместе строки с одинаковыми значениями
+    min/max - used to aggregate data (to use group by)
+    min() for string data will show a string that starts with a letter that is as early as possible in the alphabet, max() - opposite
+    ROW_NUMBER() OVER(...) - used for numbering lines
+    PARTITION BY - used to divide data into multiple subsections
+    order by - indicate the order in which the lines will be located for subsequent numbering
+    group by - groups together rows with the same values for processing
     */
