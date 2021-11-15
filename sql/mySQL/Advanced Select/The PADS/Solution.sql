@@ -1,6 +1,6 @@
 select
-case when Occupation = "Doctor"   /* CASE - проверяет истинность набора условий /*
-    THEN CONCAT(name, '(D)')      /* CONCAT() = print() - вывод данных, разделитель "," /*
+case when Occupation = "Doctor"   /* CASE - проверяет истинность набора условий */
+    THEN CONCAT(name, '(D)')      /* CONCAT() = print() - вывод данных, разделитель "," */
     when Occupation = "Actor"
     THEN CONCAT(name, '(A)')
     when Occupation = "Singer"
