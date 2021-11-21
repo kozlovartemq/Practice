@@ -1,6 +1,6 @@
 select s.name
 from Students AS s
-INNER JOIN FRIENDS AS f       /* Join Friend
+INNER JOIN FRIENDS AS f       /* Join Friend */
 ON s.ID = f.ID
 INNER JOIN Packages AS p      /* Join ID's Salaries */
 ON s.ID = p.ID
