@@ -2,6 +2,7 @@ from collections import Counter as c
 
 if __name__ == '__main__':
     """ Using collections """
+    #d = c(input()).most_common(3)
     d = c(input())                                            # Creating a Counter
     sort = sorted(d.items(), key= lambda x: (-x[1],x[0]))[:3] # Sorting by value by desc, and key by asc
     p = d[0]
