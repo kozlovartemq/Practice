@@ -36,6 +36,7 @@ proxy_options = {
 driver = webdriver.Chrome(service=Service("./chromedriver.exe"), seleniumwire_optoins=proxy_options)
 
 driver = webdriver.Chrome(service=Service("./chromedriver.exe"))  # Creating driver with default options
+driver.maximize_window()
 
 """Disable WebDriver mode to look like real user"""
 options = webdriver.ChromeOptions()
