@@ -1,4 +1,14 @@
 #!/bin/python3
+# Mutable (изменяемые) data types: list, dicts, set, user-defined classes
+# Immutable data types: int, float, decimal, bool, string, tuple, range
+
+# Decimal - более точные, чем float, но медленнее, тк реализован программно
+from decimal import Decimal
+from decimal import getcontext
+getcontext().prec = 1  # Количество знаков после запятой (def = 28)
+a = Decimal(0.1) + Decimal(0.1) + Decimal(0.1)
+if a == Decimal(0.3):
+	print("True")
 
 # Print string
 print("Hello")
@@ -135,16 +145,18 @@ full_name = "Elon Mask"
 print(full_name.replace("Elon", "Green"))
 print(full_name.find("Mask"))  # = 5 (the index of first occurrence)
 
-# Tuples (Кортежи - Статичесские массивы, которые не изменяются) - быстрее, чем лист
+# Tuples (Кортежи - Статичесские массивы, которые не изменяются) -
+# быстрее, чем лист, но лист более эффективен с точки зрения использования памяти
 grades = ("A", "B", "C", "D", "F")
-print(grades[1])
+grades += ("E", "G")  #  при попытке изменения кортежа создается новый Кортеж
+print(grades[1])	#  нельзя переопределять значения Кортежа grades[0] = "X"
 
 # Sets - множества (неповторяющиеся элементы в рандомном порядке) - быстрая проверка принадлежности
 set1 = {'a', 'o', 'u', 'i', 'e'}
 if 'e' in set1:
 	print('Optimisation!')
 
-# Dictionaries - словари, имеют "ключи" и "значения"
+# Dictionaries - словари, имеют "ключи" и "значения" - такая же скорость, как Кортеж
 drinks = {"Cola": 55, "Vodka": 350}
 print(drinks)
 drinks['Cola'] = 60
