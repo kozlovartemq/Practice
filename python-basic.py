@@ -203,3 +203,95 @@ print(new_dictionary)  # {'kate': '18', 'Mary': '24', 'Elza': '43'}
 family = ["Mum", "Dad", "Bro", "Sis"]
 for x in family:
 	print(x)
+
+# Exception Handling (Обработка исключений)
+"""List of exceptions:
+https://pythonworld.ru/tipy-dannyx-v-python/isklyucheniya-v-python-konstrukciya-try-except-dlya-obrabotki-isklyuchenij.html
+"""
+while True:
+	try:
+		enter = float(input("Enter a number: "))
+		result = 100 / enter
+
+	except ValueError:
+		print("You entered not a number!")
+
+	except ZeroDivisionError:
+		print("You can't divide by zero!")
+
+	except:  # Handling other exceptions
+		print("Something went wrong!")
+
+	else:  # Run if 'try:' ran without errors
+		print(f'100/{enter} = {result}')
+		break
+
+	finally:  # Run no matter what
+		print("The code is running no matter what")
+
+# Working with files
+# Context manager WITH AS
+"""
+'r' - открытие на чтение (является значением по умолчанию).
+'w' - открытие на запись, содержимое файла удаляется, если файла не существует, создается новый.
+'x' - открытие на запись, если файла не существует; Исключение, если файл существует.
+'a' - открытие на дозапись, информация добавляется в конец файла.
+'+' - открытие на чтение и запись
+'t' - открытие в текстовом режиме (является значением по умолчанию).
+'b' - открытие в двоичном режиме
+"""
+data_list = ["Important data1\n", "Important data2\n", "Important data3\n"]
+with open('file.txt', 'w') as r:  # do not need to r.close()
+	r.writelines(data_list)
+	print(r.writable())  	  # True
+	r.write("Something")
+
+with open('file.txt', 'r') as r:
+	print(r.readable())       # True
+	print(r.read())           # read(bytes) file
+	print(r.readlines())      # ['Important data1\n', 'Important data2\n', 'Important data3\n', 'Something']
+	print(r.readline())       # read 1 line
+	print(r.encoding)
+
+# Decorator
+def my_decorator(func):
+	def wrapper():
+		print("The code before func:")
+		t1 = datetime.now()
+		func()
+		print("The code after func:")
+		print(datetime.now() - t1)
+	return wrapper
+
+@my_decorator  # my_function = my_decorator(my_function)
+def my_function():
+	string = "Something"
+	time.sleep(0.3)
+	print(string)
+
+my_function()
+
+# List, dict, set comprehensions (Генераторы списков, словарей, множеств)
+import os
+list1 = [i for i in range(1, 11)]  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+list2 = [i ** 2 for i in list1] + list1  # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+list3 = [i for i in list2 if i % 2 == 0 and i > 50]  # [64, 100]
+set1 = {i for i in list2}  # {64, 1, 2, 3, 4, 36, 100, 5, 6, 9, 7, 8, 10, 16, 49, 81, 25}
+dict1 = {i: i ** 2 for i in list1}  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
+dict2 = {x: round(x * 0.3267, 2) for x in dict1.values() if x <= 25}  # {1: 0.33, 4: 1.31, 9: 2.94, 16: 5.23, 25: 8.17}
+list4 = [os.path.join(z, i) for z, x, c in os.walk(os.getcwd()) for i in c if '.py' in i]
+print('\n'.join(list4))
+
+# Выражение генератор - при работе с большими данными использует мало памяти и может итерироваться в цикле
+import os
+list5 = [x for x in range(20)]
+list6 = [x for x in range(20000)]
+generator = (x for x in range(20))
+generator2 = (x for x in range(20000))
+print(f'{type(list5)} size: {list5.__sizeof__()} bytes.')			 # <class 'list'> size: 120 bytes.
+print(f'{type(list6)} size: {list6.__sizeof__()} bytes.') 			 # <class 'list'> size: 89000 bytes.
+print(f'{type(generator)} size: {generator.__sizeof__()} bytes.')    # <class 'generator'> size: 48 bytes.
+print(f'{type(generator2)} size: {generator2.__sizeof__()} bytes.')  # <class 'generator'> size: 48 bytes.
+for i in generator:
+	print(i)
+
