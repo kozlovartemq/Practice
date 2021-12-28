@@ -295,3 +295,26 @@ print(f'{type(generator2)} size: {generator2.__sizeof__()} bytes.')  # <class 'g
 for i in generator:
 	print(i)
 
+# Функция генератор
+def func_generator():
+	iteration = 1
+	for i in range(10, 61, 10):
+		print(iteration, end=': ')
+		yield i  # возвращает текущий i и замораживает функцию до запроса следующего элемента
+		iteration += 1
+
+print(f'type: {type(func_generator())}. First i in func_generator(): {next(func_generator())}')
+# 1: type: <class 'generator'>. First i in func_generator(): 10
+for x in func_generator():
+	print(x, end='; ')  # 1: 10; 2: 20; 3: 30; 4: 40; 5: 50; 6: 60;
+print("\n", end='')
+
+# lambda function
+def function(x):  # function = lambda x: x**2
+	return x ** 2
+
+unsorted_list = [["Adam", 20], ["Kate", 24], ["Max", 12]]
+sorted_list = sorted(unsorted_list, key=lambda x: x[1])
+print(sorted_list)    # [['Max', 12], ['Adam', 20], ['Kate', 24]]
+filtered_list = list(filter(lambda x: x[1] >= 18, unsorted_list))
+print(filtered_list)  # [['Adam', 20], ['Kate', 24]]
