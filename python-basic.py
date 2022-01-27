@@ -179,8 +179,10 @@ drinks = {"Cola": 55, "Vodka": 350}
 drinks = dict(Cola=55, Vodka=350)
 d1 = dict.fromkeys([1, 2, 3], "Value")  # {1: 'Value', 2: 'Value', 3: 'Value'}
 drinks['Cola'] = 60
-drinks.update({"Soda": ["mb malo", "mb mnogo"]})
+drinks.update({"Soda": ["mb malo", "mb mnogo"]})  # add or update value
 print(drinks)       	      # {'Cola': 60, 'Vodka': 350, 'Soda': ['mb malo', 'mb mnogo']}
+drinks.update((("Soda", 60),))  # update from a tuple (sequence elements must be Lenght: 2)
+drinks.update((("Soda", 60), ("Cola", 50)))
 d2 = drinks.copy()
 print(drinks.get("Soda"))     # == print(drinks["Soda"]) = ["mb malo", "mb mnogo"]
 print(*drinks.get("Soda"))    #  mb malo mb mnogo (* - UNPACKING)
@@ -190,7 +192,8 @@ print(drinks.get("Martini", "NOT IN DICT"))  # NOT IN DICT
 print(drinks.values())  # for loop: for value in drinks.values():	(Для экономии ресурсов)
 print(drinks.keys())  # for loop: for key in drinks.keys():
 print(drinks.items())  # for loop: for key, value in drinks.items():
-print(drinks.pop())  # возвращает и удаляет элемент словаря (последний по умолчанию)
+print(drinks.pop('Soda'))  # принимает ключ, возвращает значение и удаляет элемент этого словаря
+print(drinks.popitem())  # возвращает и удаляет последний элемент словаря
 
 # Сделать из двух листов словарь
 NAMES = ["kate", "Mary", "Elza"]
@@ -208,26 +211,27 @@ for x in family:
 """List of exceptions:
 https://pythonworld.ru/tipy-dannyx-v-python/isklyucheniya-v-python-konstrukciya-try-except-dlya-obrabotki-isklyuchenij.html
 """
-while True:
-	try:
-		enter = float(input("Enter a number: "))
-		result = 100 / enter
+def some_function():
+	while True:
+		try:
+			enter = float(input("Enter a number: "))
+			result = 100 / enter
 
-	except ValueError:
-		print("You entered not a number!")
+		except ValueError:
+			print("You entered not a number!")
 
-	except ZeroDivisionError:
-		print("You can't divide by zero!")
+		except ZeroDivisionError as z:  # z is instance of class ZeroDivisionError, so print return __str__ of the class
+			print(z)
 
-	except:  # Handling other exceptions
-		print("Something went wrong!")
+		except:  # Handling other exceptions
+			print("Something went wrong!")
 
-	else:  # Run if 'try:' ran without errors
-		print(f'100/{enter} = {result}')
-		break
+		else:  # Run if 'try:' ran without errors
+			print(f'100/{enter} = {result}')
+			return result
 
-	finally:  # Run no matter what
-		print("The code is running no matter what")
+		finally:  # Run no matter what BUT before return statement
+			print("The code is running no matter what")
 
 # Working with files
 # Context manager WITH AS
