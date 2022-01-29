@@ -257,6 +257,38 @@ with open('file.txt', 'r') as r:
 	print(r.readline())       # read 1 line
 	print(r.encoding)
 
+# global / non global
+"""Нужны только при изменении значений,
+тк при обращении к объекту интерпретатор его ищет по правилу LEGB (local -> enclosed -> global -> builtins).
+    global (обращение к global scope) - может создать переменную в глобальном скоупе.
+    nonlocal (обращение к enclosed scope) не может создавать переменные, но может ее переопределить,
+                                          не может обращаться к global scope."""
+count = 0
+
+def counter():  # изменения глобальной переменной не происходит, поиск по правилу LEGB
+	print(count)  # 0
+
+counter()
+
+def counter2():
+	global count
+	count = 3  # global может создавать глобальную переменную
+	count += 1
+	print(count)  # 4
+
+
+
+def counter3():
+	count = 0
+	def inner():
+		nonlocal count
+		count = "4"  # nonlocal может переопределить переменную, но не создать новую
+		count += "1"
+		print(count)  # '41'
+	inner()
+
+counter3()
+
 # Decorator
 def my_decorator(func):
 	def wrapper():
@@ -274,6 +306,86 @@ def my_function():
 	print(string)
 
 my_function()
+
+# Decorators with params
+def check_type(type_):
+	def my_decorator(func):
+		def wrapped(*args):
+			for arg in args:
+				if not isinstance(arg, type_):
+					raise TypeError(f"Аргументы функции {func.__name__} должны быть {type_}")
+			return func(*args)
+		return wrapped
+	return my_decorator
+
+def max_args_length(max_len: int):
+	def my_decorator(func):
+		def wrapped(*args):
+			if len(args) > max_len:
+				raise TypeError(f"Количество аргументов функции {func.__name__} должно быть не больше {max_len}")
+			return func(*args)
+		return wrapped
+	return my_decorator
+
+@check_type(int)
+@max_args_length(max_len=3)
+def int_to_list(*args: int):
+	return list(args)
+
+print(int_to_list(1, 3, 7, 3))
+
+# Closure (Замыкание)
+"""Замыкание - это внутренняя функция, которая возвращается из внешней функции и использует объекты из внешнего скоупа.
+При выполнении: students = names() - вызывается names, которая создает объект "Лист",
+                                                               создает (не вызывает) функцию inner,
+                                                               students = вторая ссылка на функцию inner,
+                                            после выполнения:  удаляется ссылка all_names на объект лист,
+                                                               не удаляется функция inner, тк на нее есть ссылка
+Т.к. функция inner не удаляется и содержит ссылку на объект "Лист", сам Лист не удаляется из памяти и с ним можно работать.
+Каждое замыкание хранит свое состояние, они не пересекаются.
+Хранит состояние (данные), предоставляет интерфейс для работы с ними, "скрывает" данные.
+Помогает избегать глобал."""
+def names():
+	all_names = []
+
+	def inner(name: str) -> list:
+		all_names.append(name)
+		return all_names
+	return inner
+
+boys = names()
+girls = names()  # Два разных объекта не пересекаются
+print(boys('Vasya'))   # ['Vasya']
+print(boys('Misha'))   # ['Vasya', 'Misha']
+print(boys('Max'))     # ['Vasya', 'Misha', 'Max']
+print(girls('Lena'))   # ['Lena']
+print(girls('Masha'))  # ['Lena', 'Masha']
+print(girls('Olya'))   # ['Lena', 'Masha', 'Olya']
+
+boys.__closure__[0].cell_contents.append('Rediska')  # Явно обратиться к объекту замыкания
+print(boys.__closure__[0].cell_contents)  			 # ['Vasya', 'Misha', 'Max', 'Rediska']
+
+def counter():
+	count = 0
+
+	def inner(value: int) -> int:
+		nonlocal count
+		count += value
+		return count
+	return inner
+
+count_it = counter()
+print(count_it(1))   # 1
+print(count_it(1))   # 2
+print(count_it(-2))  # 0
+
+# Замыкание с lambda
+def pow_(exp):
+	return lambda base: base ** exp
+
+p = pow_(2)
+print(p(5))  # 25
+print(p(8))  # 64
 
 # List, dict, set comprehensions (Генераторы списков, словарей, множеств)
 import os
