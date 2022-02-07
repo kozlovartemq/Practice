@@ -19,6 +19,11 @@ driver = webdriver.Chrome(executable_path='./chromedriver.exe', options=options)
 options = webdriver.FirefoxOptions()
 options.set_preference("general.useragent.override", "HelloWorld")
 driver = webdriver.Firefox(executable_path="./geckodriver.exe", options=options)
+#or
+from selenium.webdriver.firefox.firefox_profile import FirefoxProfile
+profile = webdriver.FirefoxProfile()
+profile.set_preference("general.useragent.override", "HelloWorld")
+driver = webdriver.Firefox(firefox_profile=profile)
 
 """Use proxy server without authorization"""
 from selenium.webdriver.chrome.service import Service
