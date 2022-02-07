@@ -416,7 +416,7 @@ def func_generator():
 	iteration = 1
 	for i in range(10, 61, 10):
 		print(iteration, end=': ')
-		yield i  # возвращает текущий i и замораживает функцию до запроса следующего элемента
+		yield i  # возвращает текущий i и замораживает функцию до запроса следующего элемента next()
 		iteration += 1
 
 print(f'type: {type(func_generator())}. First i in func_generator(): {next(func_generator())}')
@@ -424,6 +424,35 @@ print(f'type: {type(func_generator())}. First i in func_generator(): {next(func_
 for x in func_generator():
 	print(x, end='; ')  # 1: 10; 2: 20; 3: 30; 4: 40; 5: 50; 6: 60;
 print("\n", end='')
+
+def func_generator2():
+	yield from [x for x in range(20)]  # тот же эффект, что и у выражения генератор
+
+for i in func_generator2():
+	print(i)
+
+def func_generator_with_multiple_yields():  # в функции может быть несколько yield, функция вернет, первый, который встретит
+	print("started")
+	while True:
+		yield 1
+		yield 2
+
+generator3 = func_generator_with_multiple_yields()
+next(generator3)  # 1
+next(generator3)  # 2
+
+def func_generator_with_method_send_usage():  # использование метода send для изменения поведения функции
+	print("started")
+	while True:
+		x = yield
+		print('receive:', x)
+
+generator4 = func_generator_with_method_send_usage()
+next(generator4)  # started
+next(generator4)  # receive: None
+generator4.send("test")  # receive: test
+next(generator4)  # receive: None
+
 
 # lambda function
 def function(x):  # function = lambda x: x**2
