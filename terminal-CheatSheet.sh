@@ -9,6 +9,19 @@ apt-get autoremove
 ;shift+ctrl+C  = Копировать в Терминале
 ;ctrl+C        = Отмена действия
 
+	;РАБОТА С ВИРТУАЛЬНЫМ ОКРУЖЕНИЕМ
+python -m venv venv 		 = create a virt. env. named 'venv'
+source venv/bin/activate 		 = activate a virt. env.
+.\venv\Scripts\activate 		 = for Windows
+
+(venv) pip install 'library' 'library2' 	 = install new library
+(venv) pip install -U pip 'library' 'library2' = update library
+(venv) pip install -r requirements.txt	 = install requirements from the file
+(venv) pip uninstall 'library' 'library2' -y
+
+(venv) pip freeze > requirements.txt	 = create requirements.txt file
+(venv) deactivate
+
 |  = pipes (pipelines) the standard output (stdout) of one command into the standard input of another one. Note that stderr still goes into its default destination, whatever that happen to be.
 |& = pipes both stdout and stderr of one command into the standard input of another one. Very useful, available in bash version 4 and above.
 && = executes the right-hand command of && only if the previous one succeeded.
