@@ -1,6 +1,6 @@
 	;ОБНОВЛЕНИЕ
-apt-get update
-apt-get upgrade
+apt-get update  = обновить список текущих версий пакетов на машине 
+apt-get upgrade = обновить пакеты до актуальных версий
 
 	;ЧИСТКА
 apt-get clean
@@ -10,13 +10,13 @@ apt-get autoremove
 ;ctrl+C        = Отмена действия
 
 	;РАБОТА С ВИРТУАЛЬНЫМ ОКРУЖЕНИЕМ
-python -m venv venv 		 = create a virt. env. named 'venv'
+python -m venv venv 			 = create a virt. env. named 'venv'
 source venv/bin/activate 		 = activate a virt. env.
 .\venv\Scripts\activate 		 = for Windows
 
 (venv) pip install 'library' 'library2' 	 = install new library
-(venv) pip install -U pip 'library' 'library2' = update library
-(venv) pip install -r requirements.txt	 = install requirements from the file
+(venv) pip install -U pip 'library' 'library2'   = update library
+(venv) pip install -r requirements.txt	 	 = install requirements from the file
 (venv) pip uninstall 'library' 'library2' -y
 
 (venv) pip freeze > requirements.txt	 = create requirements.txt file
