@@ -391,22 +391,24 @@ print(p(8))  # 64
 # List, dict, set comprehensions (Генераторы списков, словарей, множеств)
 import os
 list1 = [i for i in range(1, 11)]  # [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-list2 = [i ** 2 for i in list1] + list1  # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-list3 = [i for i in list2 if i % 2 == 0 and i > 50]  # [64, 100]
+list2 = ['+' for i in range(1, 11) if i % 2 == 0] # ['+', '+', '+', '+', '+']
+list3 = ['+' if i % 2 == 0 else '-' for i in range(1, 11)] # ['-', '+', '-', '+', '-', '+', '-', '+', '-', '+']
+list4 = [i ** 2 for i in list1] + list1  # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+list5 = [i for i in list2 if i % 2 == 0 and i > 50]  # [64, 100]
 set1 = {i for i in list2}  # {64, 1, 2, 3, 4, 36, 100, 5, 6, 9, 7, 8, 10, 16, 49, 81, 25}
 dict1 = {i: i ** 2 for i in list1}  # {1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
 dict2 = {x: round(x * 0.3267, 2) for x in dict1.values() if x <= 25}  # {1: 0.33, 4: 1.31, 9: 2.94, 16: 5.23, 25: 8.17}
-list4 = [os.path.join(z, i) for z, x, c in os.walk(os.getcwd()) for i in c if '.py' in i]
-print('\n'.join(list4))
+list6 = [os.path.join(z, i) for z, x, c in os.walk(os.getcwd()) for i in c if '.py' in i]
+print('\n'.join(list6))
 
 # Выражение генератор - при работе с большими данными использует мало памяти и может итерироваться в цикле
 import os
-list5 = [x for x in range(20)]
-list6 = [x for x in range(20000)]
+list7 = [x for x in range(20)]
+list8 = [x for x in range(20000)]
 generator = (x for x in range(20))
 generator2 = (x for x in range(20000))
-print(f'{type(list5)} size: {list5.__sizeof__()} bytes.')			 # <class 'list'> size: 120 bytes.
-print(f'{type(list6)} size: {list6.__sizeof__()} bytes.') 			 # <class 'list'> size: 89000 bytes.
+print(f'{type(list7)} size: {list7.__sizeof__()} bytes.')			 # <class 'list'> size: 120 bytes.
+print(f'{type(list8)} size: {list8.__sizeof__()} bytes.') 			 # <class 'list'> size: 89000 bytes.
 print(f'{type(generator)} size: {generator.__sizeof__()} bytes.')    # <class 'generator'> size: 48 bytes.
 print(f'{type(generator2)} size: {generator2.__sizeof__()} bytes.')  # <class 'generator'> size: 48 bytes.
 for i in generator:
