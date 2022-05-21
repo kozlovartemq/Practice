@@ -8,7 +8,7 @@ from decimal import getcontext
 getcontext().prec = 1  # Количество знаков после запятой (def = 28)
 a = Decimal(0.1) + Decimal(0.1) + Decimal(0.1)
 if a == Decimal(0.3):
-	print("True")
+    print("True")
 
 # Print string
 print("Hello")
@@ -48,7 +48,15 @@ Place = "Netflix"
 print("how to write \" in a string")
 print("I have watched \"" + Movie + "\" on " + Place)
 print("I have watched \"{}\" on {}".format(Movie, Place))  # в скобках можно указывать индекс параметра в функции format вот так {0}
-print(f'I have watched "{Movie}" on "{Place}"')
+print(f'I have watched "{Movie}" on "{Place}"')  # I have watched "Gifted" on "Netflix"
+print(f'I have watched "{Movie=}" on "{Place=}"')  # I have watched "Movie='Gifted'" on "Place='Netflix'"
+print(f'округление float числа {21.234524:.3f}')  # округление float числа 21.235
+now = datetime.datetime.utcnow()
+print(f'{now=:"%d/%m/%y"}')  # поддержка форматирования для datetime
+data = [('x', 'y', 'desc'), (1, 3, 4), (1, 7, 3), (1, 2, 0)]
+for x, y, decs in data:             # x y desc
+    print(f'{x:1} {y:1} {decs:3}')  # 1 3   4   Форматирование с отступами для чисел
+
 
 word = "Word"
 print(word[0])   # первая буква
@@ -63,25 +71,25 @@ print(sentence_join)    # list -> str
 print('\n'.join(sentence_split))  # Соединить строку из отдельных Айтемов, но каждое слово будет записываться с новой строки
 
 def printiwant(m, p):
-	return print("I have watched \"{}\" on {}".format(m, p))
+    return print("I have watched \"{}\" on {}".format(m, p))
 
 
 printiwant("Arrow", "torrent")
 
 # Определение и вызов функции
 def myfunc1():
-	birthday = 1
-	agenow = 22
-	agenow += birthday
-	print(agenow)
+    birthday = 1
+    agenow = 22
+    agenow += birthday
+    print(agenow)
 
 
 myfunc1()  # без аргументов, вычисления проходят только внутри функции (внутрь ничего не входит и не выходит)
 
 def myfunc(agenow):
-	birthday = 1
-	agenow += birthday
-	print(agenow)
+    birthday = 1
+    agenow += birthday
+    print(agenow)
 
 myfunc(20)  # аргументы функции для того, чтобы брать значения из остальной проги
 age = 27
@@ -89,8 +97,8 @@ myfunc(age)
 
 
 def mysqrt(x, y):  # x,y - параметры
-	m = x ** .5  # корень квадратный
-	return m + y
+    m = x ** .5  # корень квадратный
+    return m + y
 
 print(mysqrt(64,2))  # использование нескольких аргументов и возврат числа
 
@@ -111,14 +119,14 @@ print(letter.lower() in word.lower())  # True (не учитывая регис�
 
 # Conditional
 def myfuncif(age, money):
-	if (age >= 21) and (money >= 5):
-		return "its yours!"
-	elif (age >= 21) and (money < 5):
-		return "need more money!"
-	elif (age < 21) and (money >= 5):
-		return "U A a KID!"
-	else:
-		return "this kid has no money!"
+    if (age >= 21) and (money >= 5):
+        return "its yours!"
+    elif (age >= 21) and (money < 5):
+        return "need more money!"
+    elif (age < 21) and (money >= 5):
+        return "U A a KID!"
+    else:
+        return "this kid has no money!"
 
 mon = 3
 print(myfuncif(22, mon))
@@ -161,7 +169,7 @@ grades.count("A")
 set1 = {'a', 'o', 'u', 'i', 'e'}
 set2 = set([1, 2, 3, 4, "df", "ds"])
 if 'e' in set1:
-	print('Optimisation!')
+    print('Optimisation!')
 set1.add("a")
 set1.discard("a")  		  		 # remove, if there is no item 'a', nothing happens
 set1.remove("a")  		  		 # if there is no item 'a', KeyError raise
@@ -206,33 +214,33 @@ print(new_dictionary)  # {'kate': '18', 'Mary': '24', 'Elza': '43'}
 # Looping
 family = ["Mum", "Dad", "Bro", "Sis"]
 for x in family:
-	print(x)
+    print(x)
 
 # Exception Handling (Обработка исключений)
 """List of exceptions:
 https://pythonworld.ru/tipy-dannyx-v-python/isklyucheniya-v-python-konstrukciya-try-except-dlya-obrabotki-isklyuchenij.html
 """
 def some_function():
-	while True:
-		try:
-			enter = float(input("Enter a number: "))
-			result = 100 / enter
+    while True:
+        try:
+            enter = float(input("Enter a number: "))
+            result = 100 / enter
 
-		except ValueError:
-			print("You entered not a number!")
+        except ValueError:
+            print("You entered not a number!")
 
-		except ZeroDivisionError as z:  # z is instance of class ZeroDivisionError, so print return __str__ of the class
-			print(z)
+        except ZeroDivisionError as z:  # z is instance of class ZeroDivisionError, so print return __str__ of the class
+            print(z)
 
-		except:  # Handling other exceptions
-			print("Something went wrong!")
+        except:  # Handling other exceptions
+            print("Something went wrong!")
 
-		else:  # Run if 'try:' ran without errors
-			print(f'100/{enter} = {result}')
-			return result
+        else:  # Run if 'try:' ran without errors
+            print(f'100/{enter} = {result}')
+            return result
 
-		finally:  # Run no matter what BUT before return statement
-			print("The code is running no matter what")
+        finally:  # Run no matter what BUT before return statement
+            print("The code is running no matter what")
 
 # Working with files
 # Context manager WITH AS
@@ -247,16 +255,16 @@ def some_function():
 """
 data_list = ["Important data1\n", "Important data2\n", "Important data3\n"]
 with open('file.txt', 'w') as r:  # do not need to r.close()
-	r.writelines(data_list)
-	print(r.writable())  	  # True
-	r.write("Something")
+    r.writelines(data_list)
+    print(r.writable())  	  # True
+    r.write("Something")
 
 with open('file.txt', 'r') as r:
-	print(r.readable())       # True
-	print(r.read())           # read(bytes) file
-	print(r.readlines())      # ['Important data1\n', 'Important data2\n', 'Important data3\n', 'Something']
-	print(r.readline())       # read 1 line
-	print(r.encoding)
+    print(r.readable())       # True
+    print(r.read())           # read(bytes) file
+    print(r.readlines())      # ['Important data1\n', 'Important data2\n', 'Important data3\n', 'Something']
+    print(r.readline())       # read 1 line
+    print(r.encoding)
 
 # global / non global
 """Нужны только при изменении значений,
@@ -267,71 +275,71 @@ with open('file.txt', 'r') as r:
 count = 0
 
 def counter():  # изменения глобальной переменной не происходит, поиск по правилу LEGB
-	print(count)  # 0
+    print(count)  # 0
 
 counter()
 
 def counter2():
-	global count
-	count = 3  # global может создавать глобальную переменную
-	count += 1
-	print(count)  # 4
+    global count
+    count = 3  # global может создавать глобальную переменную
+    count += 1
+    print(count)  # 4
 
 
 
 def counter3():
-	count = 0
-	def inner():
-		nonlocal count
-		count = "4"  # nonlocal может переопределить переменную, но не создать новую
-		count += "1"
-		print(count)  # '41'
-	inner()
+    count = 0
+    def inner():
+        nonlocal count
+        count = "4"  # nonlocal может переопределить переменную, но не создать новую
+        count += "1"
+        print(count)  # '41'
+    inner()
 
 counter3()
 
 # Decorator
 def my_decorator(func):
-	def wrapper():
-		print("The code before func:")
-		t1 = datetime.now()
-		func()
-		print("The code after func:")
-		print(datetime.now() - t1)
-	return wrapper
+    def wrapper():
+        print("The code before func:")
+        t1 = datetime.now()
+        func()
+        print("The code after func:")
+        print(datetime.now() - t1)
+    return wrapper
 
 @my_decorator  # my_function = my_decorator(my_function)
 def my_function():
-	string = "Something"
-	time.sleep(0.3)
-	print(string)
+    string = "Something"
+    time.sleep(0.3)
+    print(string)
 
 my_function()
 
 # Decorators with params
 def check_type(type_):
-	def my_decorator(func):
-		def wrapped(*args):
-			for arg in args:
-				if not isinstance(arg, type_):
-					raise TypeError(f"Аргументы функции {func.__name__} должны быть {type_}")
-			return func(*args)
-		return wrapped
-	return my_decorator
+    def my_decorator(func):
+        def wrapped(*args):
+            for arg in args:
+                if not isinstance(arg, type_):
+                    raise TypeError(f"Аргументы функции {func.__name__} должны быть {type_}")
+            return func(*args)
+        return wrapped
+    return my_decorator
 
 def max_args_length(max_len: int):
-	def my_decorator(func):
-		def wrapped(*args):
-			if len(args) > max_len:
-				raise TypeError(f"Количество аргументов функции {func.__name__} должно быть не больше {max_len}")
-			return func(*args)
-		return wrapped
-	return my_decorator
+    def my_decorator(func):
+        def wrapped(*args):
+            if len(args) > max_len:
+                raise TypeError(f"Количество аргументов функции {func.__name__} должно быть не больше {max_len}")
+            return func(*args)
+        return wrapped
+    return my_decorator
 
 @check_type(int)
 @max_args_length(max_len=3)
 def int_to_list(*args: int):
-	return list(args)
+    return list(args)
 
 print(int_to_list(1, 3, 7, 3))
 
@@ -347,12 +355,12 @@ print(int_to_list(1, 3, 7, 3))
 Хранит состояние (данные), предоставляет интерфейс для работы с ними, "скрывает" данные.
 Помогает избегать глобал."""
 def names():
-	all_names = []
+    all_names = []
 
-	def inner(name: str) -> list:
-		all_names.append(name)
-		return all_names
-	return inner
+    def inner(name: str) -> list:
+        all_names.append(name)
+        return all_names
+    return inner
 
 boys = names()
 girls = names()  # Два разных объекта не пересекаются
@@ -367,13 +375,13 @@ boys.__closure__[0].cell_contents.append('Rediska')  # Явно обратить
 print(boys.__closure__[0].cell_contents)  			 # ['Vasya', 'Misha', 'Max', 'Rediska']
 
 def counter():
-	count = 0
+    count = 0
 
-	def inner(value: int) -> int:
-		nonlocal count
-		count += value
-		return count
-	return inner
+    def inner(value: int) -> int:
+        nonlocal count
+        count += value
+        return count
+    return inner
 
 count_it = counter()
 print(count_it(1))   # 1
@@ -382,7 +390,7 @@ print(count_it(-2))  # 0
 
 # Замыкание с lambda
 def pow_(exp):
-	return lambda base: base ** exp
+    return lambda base: base ** exp
 
 p = pow_(2)
 print(p(5))  # 25
@@ -412,43 +420,43 @@ print(f'{type(list8)} size: {list8.__sizeof__()} bytes.') 			 # <class 'list'> s
 print(f'{type(generator)} size: {generator.__sizeof__()} bytes.')    # <class 'generator'> size: 48 bytes.
 print(f'{type(generator2)} size: {generator2.__sizeof__()} bytes.')  # <class 'generator'> size: 48 bytes.
 for i in generator:
-	print(i)
+    print(i)
 
 # Функция генератор
 def func_generator():
-	iteration = 1
-	for i in range(10, 61, 10):
-		print(iteration, end=': ')
-		yield i  # возвращает текущий i и замораживает функцию до запроса следующего элемента next()
-		iteration += 1
+    iteration = 1
+    for i in range(10, 61, 10):
+        print(iteration, end=': ')
+        yield i  # возвращает текущий i и замораживает функцию до запроса следующего элемента next()
+        iteration += 1
 
 print(f'type: {type(func_generator())}. First i in func_generator(): {next(func_generator())}')
 # 1: type: <class 'generator'>. First i in func_generator(): 10
 for x in func_generator():
-	print(x, end='; ')  # 1: 10; 2: 20; 3: 30; 4: 40; 5: 50; 6: 60;
+    print(x, end='; ')  # 1: 10; 2: 20; 3: 30; 4: 40; 5: 50; 6: 60;
 print("\n", end='')
 
 def func_generator2():
-	yield from [x for x in range(20)]  # тот же эффект, что и у выражения генератор
+    yield from [x for x in range(20)]  # тот же эффект, что и у выражения генератор
 
 for i in func_generator2():
-	print(i)
+    print(i)
 
 def func_generator_with_multiple_yields():  # в функции может быть несколько yield, функция вернет, первый, который встретит
-	print("started")
-	while True:
-		yield 1
-		yield 2
+    print("started")
+    while True:
+        yield 1
+        yield 2
 
 generator3 = func_generator_with_multiple_yields()
 next(generator3)  # 1
 next(generator3)  # 2
 
 def func_generator_with_method_send_usage():  # использование метода send для изменения поведения функции
-	print("started")
-	while True:
-		x = yield
-		print('receive:', x)
+    print("started")
+    while True:
+        x = yield
+        print('receive:', x)
 
 generator4 = func_generator_with_method_send_usage()
 next(generator4)  # started
@@ -459,7 +467,7 @@ next(generator4)  # receive: None
 
 # lambda function
 def function(x):  # function = lambda x: x**2
-	return x ** 2
+    return x ** 2
 
 unsorted_list = [["Adam", 20], ["Kate", 24], ["Max", 12]]
 sorted_list = sorted(unsorted_list, key=lambda x: x[1])
