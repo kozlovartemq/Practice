@@ -215,6 +215,15 @@ print(new_dictionary)  # {'kate': '18', 'Mary': '24', 'Elza': '43'}
 family = ["Mum", "Dad", "Bro", "Sis"]
 for x in family:
     print(x)
+    
+for item in container:
+    if search_something(item):
+        # Found it!
+        process(item)
+        break
+else:                        # Else will run if the loop did not encounter a "break" statement
+    # Didn't find anything..
+    not_found_in_container()
 
 # Exception Handling (Обработка исключений)
 """List of exceptions:
